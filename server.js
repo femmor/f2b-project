@@ -1,5 +1,6 @@
 import express from "express";
 import expressLayouts from "express-ejs-layouts";
+import indexRouter from "./routes/index.js";
 
 // Fixes the path name error
 import path from "path";
@@ -21,6 +22,9 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 // Set public files directory
 app.use(express.static(__dirname + "/public"));
+
+// Routes
+app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 3008;
 
