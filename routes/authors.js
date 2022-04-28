@@ -1,4 +1,5 @@
 import express from "express";
+import Author from "../models/author.js";
 
 const router = express.Router();
 
@@ -9,7 +10,9 @@ router.get("/", (req, res) => {
 
 // New author route
 router.get("/new", (req, res) => {
-  res.render("authors/new");
+  res.render("authors/new", {
+    author: new Author(),
+  });
 });
 
 // Create author route
