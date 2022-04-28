@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import expressLayouts from "express-ejs-layouts";
 import indexRouter from "./routes/index.js";
+import authorsRouter from "./routes/authors.js";
+import booksRouter from "./routes/books.js";
 
 // Fixes the path name error
 import path from "path";
@@ -48,6 +50,8 @@ app.use(express.static(__dirname + "/public"));
 
 // Routes
 app.use("/", indexRouter);
+app.use("/authors", authorsRouter);
+app.use("/books", booksRouter);
 
 const PORT = process.env.PORT || 3008;
 
