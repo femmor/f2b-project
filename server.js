@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import expressLayouts from "express-ejs-layouts";
 import indexRouter from "./routes/index.js";
@@ -47,6 +48,8 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 // Set public files directory
 app.use(express.static(__dirname + "/public"));
+// Set body parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/", indexRouter);
