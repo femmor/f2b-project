@@ -1,4 +1,6 @@
 import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 import expressLayouts from "express-ejs-layouts";
 import indexRouter from "./routes/index.js";
 
@@ -11,6 +13,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+dotenv.config();
+
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on("error", err => {
+  console.error(err);
+  process.exit(1);
+});
+
+db.once("open", () => {
+  console.log("Connected to MongoDB");
+});
+
+// Check the connection environment
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 // Set view engine
 app.set("view engine", "ejs");
